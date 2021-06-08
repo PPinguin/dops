@@ -1,0 +1,34 @@
+.user-item{
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+    align-items: center;
+}
+
+.user-link{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 1em;
+    width: inherit;
+}
+
+.user-link > p{
+    margin-left: 1em;
+}
+
+.place{
+    font-size: 24pt;
+    width: 1.5em;
+    text-align: center;
+}
+
+.user-points{
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+#current{
+    padding: .7em;
+    text-align: center;
+}

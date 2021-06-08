@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='edit_form_style.css') }}">
+<form action="" method="post" novalidate>
+    <h2 class="form-title">{{ title }}</h2>
+    {{ form.hidden_tag() }}
+    {{ form.body(cols=32, rows=4, placeholder="Body") }}
+    {% for error in form.body.errors %}
+    <span style="color:crimson">{{error}}</span>
+    {% endfor %}
+    {{ form.answer(size=32, placeholder="Answer") }}
+    {% for error in form.answer.errors %}
+    <span style="color:crimson">{{error}}</span>
+    {% endfor %}
+    <div>
+        {{ form.theme.label }}
+        <div class='color-picker-wrapper' >{{ form.theme() }}</div>
+    </div>
+    {{ form.submit(class="btn") }}
+    {%- if proportion is defined %}
+    <div id="statistic">
+        <div id="value" style="--prop: {{ proportion }}% "></div>
+        {{proportion}}% 
+    </div>
+    {%- endif %}
+</form>
+<script>
+    var color_picker = $("input[type='color']").first();
+    var color_picker_wrapper = $(".color-picker-wrapper").first();
+    color_picker.on('change',function() {
+    	color_picker_wrapper.css("background-color", color_picker.val())    
+    })
+    color_picker_wrapper.css("background-color", color_picker.val())    
+</script>
+{% endblock %}

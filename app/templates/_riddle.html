@@ -1,0 +1,42 @@
+<div class="riddle" 
+    style="
+        --theme:{{ riddle.theme }};
+        --text: {% if riddle.is_dark() %}#fff{% else %}#000{% endif %};
+        --base: {% if ((not current_user.is_anonymous) and (riddle.is_answered(current_user))) %}{% if riddle.get_answer(current_user) %}#1fab62{% else %}#ab1f1f{% endif %}{% else %}var(--main-color){% endif %};
+        " 
+    id="{{ riddle.id }}">
+    <span 
+        class='riddle-id'
+        style="color:var(--text)">#{{ riddle.id }}</span>
+    <pre 
+        class="riddle-body" 
+        style="color:var(--text)">{{ riddle.body }}</pre>
+    {%- if current_user.is_anonymous %}
+    <div class="riddle-action">
+        <span>{{ riddle.num_answers() }}</span>
+        <a href="{{ url_for('user', id=riddle.author.id) }}"><img src='{{ riddle.author.avatar(24) }}' alt='avatar'></a>
+    </div>    
+    {%- else %}
+    {%- if riddle.is_answered(current_user) %}
+    <div class="riddle-action" onclick='info(this)'>
+        <span>{{ riddle.num_answers() }}</span>
+        <p>Show answer</p>
+        <a href="{{ url_for('user', id=riddle.author.id) }}"><img src='{{ riddle.author.avatar(24) }}' alt='avatar'></a>
+    </div>
+    {%- elif current_user.id != riddle.user_id %}
+    <div class="riddle-action" onclick='answer(this)'>
+        <span>{{ riddle.num_answers() }}</span>
+        <p>Give answer</p>
+        <a href="{{ url_for('user', id=riddle.author.id) }}"><img src='{{ riddle.author.avatar(24) }}' alt='avatar'></a>
+    </div>
+    {%- elif current_user.id == riddle.user_id %}
+    <a href="{{ url_for('edit_riddle', id = riddle.id) }}" style="color:white">
+        <div class="riddle-action">
+            <span>{{ riddle.num_answers() }}</span>
+            <p>Edit</p>
+            <span></span>
+        </div>
+    </a>
+    {%- endif %}  
+    {%- endif %}
+</div>

@@ -1,0 +1,89 @@
+.riddle{
+    background-color: var(--theme);
+    text-align: center;
+    flex-direction: column;
+    justify-items: flex-start;
+    cursor: pointer;
+    position: relative;
+}
+
+.riddle + .riddle{
+    margin-top: 1em;
+}
+
+.riddle-body{
+    padding:3em;
+    font-size: 18pt;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: break-spaces;
+}
+
+.riddle-id{
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+.riddle-action{
+    padding: .6em;
+    font-size: 14pt;
+    background-color: var(--base);
+    color: white;
+    z-index: 2;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.riddle-form{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 3em);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--base);
+}
+
+.riddle-form > * {
+    color: white;
+    text-align: center;
+    font-size: 16pt;
+    background-color: var(--base);
+    border: 0;
+}
+
+.close{ 
+    position: inherit;  
+    top: 1em;
+    font-size: 14pt;
+    left:calc(100% - 2em);
+}
+
+#navigation{
+    display: flex;
+    justify-content: center;
+    padding: .5em;
+}
+
+#navigation > a{
+    flex: 0 0 1.4em;
+    border-radius: 50%;
+    text-align: center;
+    margin: 0 .2em;
+}
+
+.page:hover{
+    background-color: lightgray;
+}
+
+.current{
+    background-color: var(--main-color);
+    color: white;
+}

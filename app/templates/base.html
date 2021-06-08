@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type=text/javascript src="{{url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base_style.css') }}">
+    {%- if title %}
+    <title>{{ title }}</title>
+    {%- else %}
+    <title>Welcome to dops</title>
+    {%- endif %}
+    </head>
+    <body>
+        <header>
+            <div>
+                <a href="{{ url_for('index') }}" id="logo">
+                    <svg width="36" height="36" viewBox="0 0 144 144" fill="var(--main-color)">
+                        <path d="M 69.369897,0.01737695 C 59.109429,-0.21454905 48.764767,1.874044 39.152289,6.347808 l 6.372073,13.646082 c 17.108329,-7.962432 37.141456,-6.211341 52.604552,4.595267 L 106.78461,12.251798 C 95.614224,4.445219 82.561925,0.31556895 69.369897,0.01737695 Z M 19.837187,19.846845 c -26.4495775,26.398819 -26.4495876,69.425229 0,95.824045 26.449577,26.39881 69.558707,26.39881 96.008293,0 l -10.66677,-10.64631 c -20.684224,20.64453 -53.990534,20.64452 -74.674755,0 -20.6842113,-20.644511 -20.6842113,-53.886911 0,-74.531438 z m 103.617953,9.04347 -12.36108,8.63909 c 3.53303,5.036018 6.15537,10.648698 7.74961,16.587047 l 14.57105,-3.89678 c -2.0497,-7.634901 -5.41717,-14.854571 -9.95958,-21.329357 z m -55.610127,1.271967 c -9.668457,0 -19.341223,3.658172 -26.674281,10.977158 -14.666127,14.637982 -14.666127,38.600866 0,53.238844 14.666117,14.637966 38.675086,14.637966 53.341212,0 14.666126,-14.637978 14.666126,-38.600862 0,-53.238844 C 87.178877,33.820454 77.513478,30.162282 67.845013,30.162282 Z m 0,14.96217 c 5.775669,0 11.549775,2.219445 16.00016,6.661284 8.900761,8.883692 8.900761,23.062565 0,31.946256 -8.900766,8.883682 -23.106912,8.883682 -32.007674,0 -8.900771,-8.883691 -8.900771,-23.062564 0,-31.946256 4.450381,-4.441839 10.231854,-6.661284 16.007514,-6.661284 z m 52.597197,27.225992 c -0.53685,6.124448 -2.14087,12.110736 -4.74406,17.68257 l 13.67233,6.35983 c 3.34691,-7.16368 5.40929,-14.852148 6.09951,-22.726317 z"></path>
+                    </svg>
+                    <span>dops.</span>
+                </a>
+            </div>
+            <div>
+                {%- if current_user.is_anonymous %}
+                <a class="btn-link" href="{{ url_for('login') }}">Sign in</a>
+                {%- else %}
+                <a href="/user/{{ current_user.id }}">
+                    <img src='{{ current_user.avatar(24) }}' alt='avatar'>
+                </a>
+                {%- endif %} 
+            </div>
+        </header>
+        <div id="page">
+        <nav>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="{{ url_for('home') }}" class="nav-link">
+                        <svg width="24" height="24" viewBox="0 0 256 256" fill="{% if request.endpoint == 'home' %}var(--main-color){% else %}silver{% endif %}">
+                            <path d="M 128 0 L 0.77929688 128 L 0 128 L 0 128.7832 L 0 256 L 96 256 L 96 192 L 96 160 L 160 160 L 160 192 L 160 256 L 256 256 L 256 128.7832 L 256 128 L 255.2207 128 L 128 0 z "></path>
+                        </svg>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('explore') }}" class="nav-link">
+                        <svg width="24" height="24" viewBox="0 0 256 256" fill="{% if request.endpoint == 'explore' %}var(--main-color){% else %}silver{% endif %}">
+                            <path d="M 127.67578 0 A 128 128 0 0 0 0 128 A 128 128 0 0 0 128 256 A 128 128 0 0 0 256 128 A 128 128 0 0 0 128 0 A 128 128 0 0 0 127.67578 0 z M 208 48 L 155.54688 155.54688 L 48 208 L 100.45312 100.45312 L 208 48 z M 128 112 A 16 16 0 0 0 112 128 A 16 16 0 0 0 128 144 A 16 16 0 0 0 144 128 A 16 16 0 0 0 128 112 z"></path>
+                        </svg>
+                    </a>
+                </li>
+                <li class="nav-item">
+                     <a href="{{ url_for('rate') }}" class="nav-link">
+                        <svg width="24" height="24" viewBox="0 0 256 256" fill="{% if request.endpoint == 'rate' %}var(--main-color){% else %}silver{% endif %}">
+                            <path d="M 127.66016 0 L 98.097656 98.236328 L 0 98.158203 L 79.826172 158.04102 L 49.441406 256 L 128.33789 194.77344 L 207.6582 255.39258 L 176.59375 157.66992 L 256 97.175781 L 157.9043 98.005859 L 127.66016 0 z "></path>
+                        </svg>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('user', id = current_user.id) }}" class="nav-link">
+                        <svg width='24' height='24' viewBox="0 0 256 256" fill="{% if request.endpoint == 'user' %}var(--main-color){% else %}silver{% endif %}">
+                            <path d="M 127.70312 8 A 63.999995 63.999995 0 0 0 64 72 A 63.999995 63.999995 0 0 0 128 136 A 63.999995 63.999995 0 0 0 192 72 A 63.999995 63.999995 0 0 0 128 8 A 63.999995 63.999995 0 0 0 127.70312 8 z M 126.05469 150 A 127.99999 127.99999 0 0 0 0 255.77344 L 252.11133 255.77344 A 127.99999 127.99999 0 0 0 126.05469 150 z "></path>
+                        </svg>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('new_riddle') }}" class="nav-link">
+                        <svg width='24' height='24' viewBox="0 0 256 256" fill="{% if request.endpoint == 'new_riddle' or request.endpoint == 'edit_riddle' %}var(--main-color){% else %}silver{% endif %}">
+                            <path d="M 112 32 L 112 112 L 32 112 L 32 144 L 112 144 L 112 224 L 144 224 L 144 144 L 224 144 L 224 112 L 144 112 L 144 32 L 112 32 z "></path>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div id="block">
+            {%- with messages = get_flashed_messages() %}
+            {%- if messages %}
+            {%- for message in messages %}
+            <div class="message">{{ message }}</div>
+            {%- endfor %}
+            {%- endif %}
+            {%- endwith %}
+            {% block content %}{% endblock %}
+        </div>
+        </div>
+        <footer>
+            <span>Some content</span>
+        </footer>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </body>
+</html>

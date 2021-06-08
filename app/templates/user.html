@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user_style.css') }}">
+    <div id="user-info" class="sticky">
+        <img src='{{ user.avatar(128) }}' alt="avatar-large" >
+        <div>
+            <h2>{{user.username}}</h2>
+            <p>Points: {{user.points}}</p>
+            <p>Followers: {{ user.followers_count() }} {% if user == current_user %}Followings: {{ user.followed.count() }}{%endif%}</p>
+            {% if not current_user.is_anonymous %}
+                {% if user == current_user %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+                {% elif current_user.is_following(user) %}
+                <a href="{{ url_for('unfollow', id=user.id) }}">Unfollow</a>
+                {%- else %}
+                <a href="{{ url_for('follow', id=user.id) }}">Follow</a>
+                {%- endif %}
+            {%- endif %}
+        </div>
+    </div>
+    {% include '_list.html' %}
+{% endblock %}

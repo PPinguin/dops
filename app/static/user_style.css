@@ -1,0 +1,13 @@
+img[alt="avatar-large"] {
+    border-radius: 10%;
+}
+
+#user-info{
+    display: flex;
+    padding: 1em;
+}
+
+#user-info> div{
+    margin-left: 1.5em;
+    flex: 1;
+}

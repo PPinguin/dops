@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='auth_form_style.css') }}">   
+    <form action="" method="post" novalidate>
+        <h2 class="form-title">Sign up</h2>
+        {{ form.hidden_tag() }}
+        {{ form.email.label }}
+        {{ form.email(size=32) }}
+        {% for error in form.email.errors %}
+        <span class='error'>{{error}}</span>
+        {% endfor %}
+        {{ form.username.label }}
+        {{ form.username(size=32) }}
+        {{ form.password.label }}
+        {{ form.password(size=32) }}
+        {% for error in form.password.errors %}
+        <span class='error'>{{error}}</span>
+        {% endfor %}
+        {{ form.password_again.label }}
+        {{ form.password_again(size=32) }}
+        {% for error in form.password_again.errors %}
+        <span class='error'>{{error}}</span>
+        {% endfor %}
+        {{ form.submit(class="btn") }}
+    </form>
+{% endblock %}

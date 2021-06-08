@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user_item_style.css') }}">
+    <div class="sticky" id="current">
+        <h2> You're at {{ current_user.get_place() }} place!</h2>
+    </div>
+    {% for user in users %}
+        <div class="user-item">
+            <span class="place">{{ loop.index }}</span>
+            <a href="/user/{{ user.id }}" class='user-link'>
+                <img src='{{ user.avatar(36) }}' alt='avatar'>
+                <p>{{ user.username }}</p>
+            </a>
+            <p class="user-points">{{ user.points }}</p>
+        </div>
+    {% endfor%}
+{% endblock %}

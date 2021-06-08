@@ -1,0 +1,38 @@
+form{ 
+    padding: 3em; 
+    display: grid;
+    grid-template-columns: 35% 65%;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0;
+    row-gap: .6em;
+}
+form > * {
+    font-size: 14pt;
+    padding: .3em;
+}
+.form-title {
+    text-align: center;
+    font-size: 18pt;
+    grid-column: 1/3;
+}
+#submit {
+    grid-column: 1/3;
+    font-size: 14pt;
+    width:50%;
+    justify-self: center;
+}
+.error{
+    color:crimson ;
+    font-size: 10pt;
+    grid-column: 1/3;
+}
+.row{
+    grid-column: 1/3;
+}
+#sign-in{
+    text-align: center;
+    grid-column: 1/3;
+}
+
+nav{display: none;}

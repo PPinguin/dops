@@ -1,0 +1,19 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='riddle_style.css') }}">
+<div id="list">
+    {% if riddles[0] is defined %}
+        {% for riddle in riddles %}
+            {% include '_riddle.html' %}
+        {% endfor %}
+        <div id='navigation'>
+            {% for i in range(start, end+1) %}
+                {% if i == page %}
+                    <a href="" class="current">{{i}}</a>
+                {% else %}
+                    <a href="{{ url_for(request.endpoint, page=i) }}" class="page">{{i}}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <p style="width:100%; text-align: center; padding: 1em">There is no riddle yet. So sad :/</p>
+    {% endif %}
+</div>

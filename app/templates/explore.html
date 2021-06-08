@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form id="search-box" class="sticky" method="post" action="" novalidate>
+        {{ form.hidden_tag() }}
+        {{ form.body(id="search", placeholder="Search...") }}
+        {{ form.submit(class="btn") }}
+    </form>
+    {% include '_list.html' %}
+{% endblock %}
